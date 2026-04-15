@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
-    --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
+    /* Warm cream background */
+    --background: 36 30% 97%;
+    --foreground: 22 20% 12%;
+    /* Soft warm muted */
+    --muted: 36 18% 92%;
+    --muted-foreground: 22 12% 48%;
+    /* Rich chocolate accent */
+    --accent: 22 55% 32%;
+    --accent-foreground: 36 30% 97%;
+    /* Warm border */
+    --border: 36 15% 86%;
+    --ring: 22 55% 32%;
+    --primary: 22 20% 12%;
+    --primary-foreground: 36 30% 97%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
-    --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --background: 22 18% 8%;
+    --foreground: 36 20% 94%;
+    --muted: 22 12% 14%;
+    --muted-foreground: 36 10% 55%;
+    --accent: 22 55% 42%;
+    --accent-foreground: 36 30% 97%;
+    --border: 22 12% 18%;
+    --ring: 22 55% 42%;
+    --primary: 36 20% 94%;
+    --primary-foreground: 22 18% 8%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,13 +72,13 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
+  /* Brand color utilities */
   .btn-brand-primary {
     background-color: var(--brand-primary, hsl(var(--primary)));
     color: white;
   }
   .btn-brand-primary:hover {
-    opacity: 0.9;
+    opacity: 0.88;
   }
 
   .text-brand-primary {
@@ -100,6 +100,21 @@
   .bg-brand-secondary {
     background-color: var(--brand-secondary, hsl(var(--accent)));
   }
+
+  /* Chocolate warm gradient */
+  .bg-choco-gradient {
+    background: linear-gradient(135deg, hsl(22 35% 18%) 0%, hsl(28 45% 22%) 100%);
+  }
+
+  /* Cream warm tint */
+  .bg-cream {
+    background-color: hsl(38 38% 95%);
+  }
+
+  /* Gold accent stripe */
+  .gold-dot {
+    background-color: hsl(38 70% 55%);
+  }
 }
 
 /* Smooth scrolling */
@@ -109,7 +124,8 @@ html {
 
 /* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background: hsl(22 55% 32% / 0.18);
+  color: hsl(22 20% 12%);
 }
 
 /* Focus styles */
@@ -117,18 +133,25 @@ html {
   @apply outline-2 outline-offset-2 outline-ring;
 }
 
-/* Cookie consent animation */
+/* Animations */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.6; }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out;
-}
+.animate-fade-in       { animation: fade-in 0.5s ease-out; }
+.animate-fade-in-up    { animation: fade-in-up 0.6s ease-out; }
+.animate-slide-in-right { animation: slide-in-right 0.3s ease-out; }
+.animate-pulse-dot     { animation: pulse-dot 1.8s ease-in-out infinite; }
